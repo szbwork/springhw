@@ -1,9 +1,12 @@
 package bsz.ui.actions;
 
 import bsz.ui.MainMenu;
-import bsz.ui.UserMenu;
 
 public class ShowMainMenu implements MenuAction {
+
+    public void setMainMenu(MainMenu mainMenu) {
+        this.mainMenu = mainMenu;
+    }
 
     MainMenu mainMenu;
 

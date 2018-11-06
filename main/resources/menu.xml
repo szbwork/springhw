@@ -18,25 +18,25 @@
                 <bean class="bsz.ui.MenuItem">
                     <property name="text" value="Exit"/>
                     <property name="key" value="X"/>
-                    <property name="action" ref="exit"/>
+                    <property name="action" ref="exitMainMenu"/>
                 </bean>
             </list>
         </constructor-arg>
     </bean>
 
-    <bean id="UserMenu" class="bsz.ui.UserMenu" scope="prototype">
+    <bean id="userMenu" class="bsz.ui.UserMenu" scope="prototype">
         <constructor-arg>
             <list>
                 <bean class="bsz.ui.MenuItem">
                     <property name="text" value="addUser"/>
-                    <property name="key" value="R"/>
+                    <property name="key" value="A"/>
                     <property name="action" ref="addUser"/>
                 </bean>
-                <!--<bean class="bsz.ui.MenuItem">-->
-                    <!--<property name="text" value="List users"/>-->
-                    <!--<property name="key" value="L"/>-->
-                    <!--<property name="action" ref="listUsers"/>-->
-                <!--</bean>-->
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="List users"/>
+                    <property name="key" value="L"/>
+                    <property name="action" ref="listUsers"/>
+                </bean>
                 <bean class="bsz.ui.MenuItem">
                     <property name="text" value="Return to main menu"/>
                     <property name="key" value="X"/>
@@ -46,15 +46,29 @@
         </constructor-arg>
     </bean>
 
-    <bean id="exit" class="bsz.ui.actions.Exit"/>
-    <bean id="showMainMenu" class="bsz.ui.actions.ShowMainMenu"/>
-    <bean id="showUserMenu" class="bsz.ui.actions.ShowUserMenu"/>
 
-    <!--<bean id="addUser" class="bsz.ui.actions.AddUser">-->
-    <!--<constructor-arg name="userService" ref="userService" />-->
-    <!--</bean>-->
+    <bean id="exitMainMenu" class="bsz.ui.actions.ExitMainMenu"/>
 
-    <bean id="addUser" class="bsz.ui.actions.AddUser">
-    <constructor-arg name="userService" ref="userService" />
+    <bean id="exitUserMenu" class="bsz.ui.actions.ExitUserMenu" lazy-init="true">
+        <property name="userMenu" ref="userMenu" />
     </bean>
+
+    <bean id="showMainMenu" class="bsz.ui.actions.ShowMainMenu">
+    <property name="mainMenu" ref="mainMenu" />
+    </bean>
+
+    <bean id="showUserMenu" class="bsz.ui.actions.ShowUserMenu">
+        <property name="userMenu" ref="userMenu" />
+    </bean>
+
+
+    <bean id="addUser" class="bsz.ui.actions.AddUser" lazy-init="true">
+    <property name="userService" ref="userService" />
+    </bean>
+
+    <bean id="listUsers" class="bsz.ui.actions.ListUsers" lazy-init="true">
+    <property name="userService" ref="userService" />
+    </bean>
+
+
 </beans>
