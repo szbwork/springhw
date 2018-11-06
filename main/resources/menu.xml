@@ -1,0 +1,59 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="mainMenu" class="bsz.ui.MainMenu" scope="prototype">
+        <constructor-arg>
+            <list>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="User"/>
+                    <property name="key" value="U"/>
+                    <property name="action" ref="showUserMenu"/>
+                </bean>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="Admin"/>
+                    <property name="key" value="A"/>
+                    <property name="action" ref="showAdminMenu"/>
+                </bean>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="Exit"/>
+                    <property name="key" value="X"/>
+                    <property name="action" ref="exit"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="UserMenu" class="bsz.ui.UserMenu" scope="prototype">
+        <constructor-arg>
+            <list>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="addUser"/>
+                    <property name="key" value="R"/>
+                    <property name="action" ref="addUser"/>
+                </bean>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="List users"/>
+                    <property name="key" value="L"/>
+                    <property name="action" ref="listUsers"/>
+                </bean>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="Return to main menu"/>
+                    <property name="key" value="X"/>
+                    <property name="action" ref="returnToMainMenu"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!--<bean id="returnToParentMenu" class="ua.epam.spring.hometask.ui.actions.ReturnToParentMenuAction" />-->
+
+    <bean id="addUser" class="bsz.ui.actions.AddUserAction">
+    <constructor-arg name="userService" ref="userService" />
+    <constructor-arg name="auditoriumService" ref="auditoriumService" />
+    </bean>
+
+    <!--<bean id="listUsers" class="ua.epam.spring.hometask.ui.actions.ListUsersAction">-->
+    <!--<constructor-arg name="userService" ref="userService" />-->
+    <!--</bean>-->
+</beans>

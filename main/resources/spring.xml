@@ -1,0 +1,86 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+
+    <import resource="menu.xml"/>
+    <context:component-scan base-package="bsz" />
+
+    <!--<bean id="helloWorldService"-->
+          <!--class="bsz.service.HelloWorldService">-->
+        <!--<property name="name" value="Program Creek Readers" />-->
+    <!--</bean>-->
+
+
+
+
+
+
+    <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:auditorium.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="auditorium" class="bsz.domain.Auditorium" scope="prototype">
+        <property name="name" value="${a[0].name}"/>
+        <property name="numberOfSeatsString" value="${a[0].numberOfSeats}"/>
+        <property name="vipSeatsString" value="${a[0].vipSeats}"/>
+        <!--<property name="numberOfSeats" value="#{new Long('${a[0].numberOfSeats}')}"/>-->
+        <!--<property name="vipSeats" value="#{new TreeSet('${a[0].vipSeats}')}"/>-->
+    </bean>
+
+
+
+
+    <bean id="auditoriumDao" class="bsz.dao.AuditoriumDao">
+        <constructor-arg name="auditorium" ref="auditorium" />
+    </bean>
+
+    <bean id="eventDao" class="bsz.dao.EventDao">
+    </bean>
+
+    <bean id="userDao" class="bsz.dao.UserDao">
+    </bean>
+
+
+    <!--<bean id="userServiceImp" class="bsz.service.UserServiceImp">-->
+        <!--<property name="userDao" ref="userDao"  />-->
+    <!--</bean>-->
+
+
+
+    <bean id="userService" class="bsz.service.UserServiceImp">
+        <constructor-arg ref="userDao"/>
+    </bean>
+
+    <bean id="eventService" class="bsz.service.EventServiceImp">
+        <constructor-arg ref="eventDao"/>
+    </bean>
+
+    <bean id="auditoriumService" class="bsz.service.AuditoriumServiceImp">
+        <constructor-arg ref="auditoriumDao"/>
+    </bean>
+
+    <bean id="discountService" class="bsz.service.DiscountServiceImp">
+        <constructor-arg>
+            <list>
+                <bean class="bsz.service.strategies.BirthdayStrategy">
+                </bean>
+                <bean class="bsz.service.strategies.TenthTicketStrategy">
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="bookingService" class="bsz.service.BookingServiceImp">
+        <constructor-arg ref="discountService"/>
+        <constructor-arg ref="userService"/>
+    </bean>
+
+
+</beans>
