@@ -22,7 +22,6 @@ public class Menu {
                     item.getAction().doAction();
                 }
             }
-
-        } while (!endOfThisMenu);
+        } while (true);
     }
 }

@@ -49,10 +49,6 @@
 
     <bean id="exitMainMenu" class="bsz.ui.actions.ExitMainMenu"/>
 
-    <bean id="exitUserMenu" class="bsz.ui.actions.ExitUserMenu" lazy-init="true">
-        <property name="userMenu" ref="userMenu" />
-    </bean>
-
     <bean id="showMainMenu" class="bsz.ui.actions.ShowMainMenu">
     <property name="mainMenu" ref="mainMenu" />
     </bean>
@@ -69,6 +65,4 @@
     <bean id="listUsers" class="bsz.ui.actions.ListUsers" lazy-init="true">
     <property name="userService" ref="userService" />
     </bean>
-
-
 </beans>
