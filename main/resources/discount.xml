@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="discountService" class="bsz.service.DiscountServiceImp">
+        <constructor-arg>
+            <list>
+                <bean class="bsz.service.strategies.BirthdayStrategy">
+                </bean>
+                <bean class="bsz.service.strategies.TenthTicketStrategy">
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>
