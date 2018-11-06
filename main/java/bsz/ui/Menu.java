@@ -3,14 +3,15 @@ package bsz.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMenu {
+public class Menu {
 
-    public MainMenu(List<MenuItem> menuItems) {
-        this.menuItems = menuItems;
+    public Menu() {
     }
-
     private List<MenuItem> menuItems = new ArrayList();
 
+    public Menu(List<MenuItem> menuItems) {
+        this.menuItems = menuItems;
+    }
 
     public void show() {
         System.out.println("-----------MENU--------------");
@@ -27,5 +28,4 @@ public class MainMenu {
         }
 
     }
-
 }

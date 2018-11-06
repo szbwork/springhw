@@ -1,5 +1,7 @@
 package bsz.ui;
 
+import bsz.ui.actions.MenuAction;
+
 public class MenuItem {
     private String text;
     private MenuAction action;

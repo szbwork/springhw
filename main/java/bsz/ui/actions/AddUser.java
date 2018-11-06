@@ -1,14 +1,15 @@
-package bsz.ui;
+package bsz.ui.actions;
 
 import bsz.domain.User;
 import bsz.service.UserServiceImp;
+import bsz.ui.Console;
 
-public class AddUserAction implements MenuAction {
+public class AddUser implements MenuAction {
 //    public class AddUser extends UserActions implements MenuAction {
 
     UserServiceImp userService;
 
-    public AddUserAction(UserServiceImp userService) {
+    public AddUser(UserServiceImp userService) {
        this.userService  = userService;
     }
 
