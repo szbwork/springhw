@@ -18,14 +18,6 @@ public class UserServiceImp implements UserService {
         this.userDao = userDao;
     }
 
-//    public void setUserDao(UserDao userDao) {
-//        this.userDao = userDao;
-//    }
-//
-//    public UserDao getUserDao() {
-//        return userDao;
-//    }
-
     /**
      * Finding user by email
      * 

@@ -2,13 +2,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="mainMenu" class="bsz.ui.MainMenu" scope="prototype">
-        <constructor-arg>
+    <bean id="mainMenu" class="bsz.ui.MainMenu" lazy-init="true">
+        <property name="menuItems">
             <list>
                 <bean class="bsz.ui.MenuItem">
                     <property name="text" value="User"/>
                     <property name="key" value="U"/>
                     <property name="action" ref="showUserMenu"/>
+                </bean>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="Event"/>
+                    <property name="key" value="E"/>
+                    <property name="action" ref="showEventMenu"/>
                 </bean>
                 <!--<bean class="bsz.ui.MenuItem">-->
                     <!--<property name="text" value="Admin"/>-->
@@ -21,16 +26,21 @@
                     <property name="action" ref="exitMainMenu"/>
                 </bean>
             </list>
-        </constructor-arg>
+        </property>
     </bean>
 
-    <bean id="userMenu" class="bsz.ui.UserMenu" scope="prototype">
-        <constructor-arg>
+    <bean id="userMenu" class="bsz.ui.UserMenu" lazy-init="true">
+        <property name="menuItems">
             <list>
                 <bean class="bsz.ui.MenuItem">
-                    <property name="text" value="addUser"/>
+                    <property name="text" value="Add User"/>
                     <property name="key" value="A"/>
                     <property name="action" ref="addUser"/>
+                </bean>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="Remove User"/>
+                    <property name="key" value="R"/>
+                    <property name="action" ref="removeUser"/>
                 </bean>
                 <bean class="bsz.ui.MenuItem">
                     <property name="text" value="List users"/>
@@ -43,20 +53,19 @@
                     <property name="action" ref="showMainMenu"/>
                 </bean>
             </list>
-        </constructor-arg>
+        </property>
     </bean>
 
 
-    <bean id="exitMainMenu" class="bsz.ui.actions.ExitMainMenu"/>
+    <bean id="exitMainMenu" class="bsz.ui.actions.ExitMainMenu" lazy-init="true"/>
 
-    <bean id="showMainMenu" class="bsz.ui.actions.ShowMainMenu">
+    <bean id="showMainMenu" class="bsz.ui.actions.ShowMainMenu" lazy-init="true">
     <property name="mainMenu" ref="mainMenu" />
     </bean>
 
-    <bean id="showUserMenu" class="bsz.ui.actions.ShowUserMenu">
+    <bean id="showUserMenu" class="bsz.ui.actions.ShowUserMenu" lazy-init="true">
         <property name="userMenu" ref="userMenu" />
     </bean>
-
 
     <bean id="addUser" class="bsz.ui.actions.AddUser" lazy-init="true">
     <property name="userService" ref="userService" />
@@ -65,4 +74,50 @@
     <bean id="listUsers" class="bsz.ui.actions.ListUsers" lazy-init="true">
     <property name="userService" ref="userService" />
     </bean>
+
+    <bean id="removeUser" class="bsz.ui.actions.RemoveUser" lazy-init="true">
+        <property name="userService" ref="userService" />
+    </bean>
+
+    <bean id="showEventMenu" class="bsz.ui.actions.ShowEventMenu" lazy-init="true">
+        <property name="eventMenu" ref="eventMenu" />
+    </bean>
+
+    <bean id="eventMenu" class="bsz.ui.EventMenu" lazy-init="true">
+        <property name="menuItems">
+            <list>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="Add Event"/>
+                    <property name="key" value="A"/>
+                    <property name="action" ref="addEvent"/>
+                </bean>
+                <!--<bean class="bsz.ui.MenuItem">-->
+                    <!--<property name="text" value="Remove Event"/>-->
+                    <!--<property name="key" value="R"/>-->
+                    <!--<property name="action" ref="removeEvent"/>-->
+                <!--</bean>-->
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="List Events"/>
+                    <property name="key" value="L"/>
+                    <property name="action" ref="listEvents"/>
+                </bean>
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="Return to main menu"/>
+                    <property name="key" value="X"/>
+                    <property name="action" ref="showMainMenu"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="addEvent" class="bsz.ui.actions.AddEvent" lazy-init="true">
+        <property name="eventService" ref="eventService"/>
+        <property name="auditoriumService" ref="auditoriumService"/>
+    </bean>
+
+    <bean id="listEvents" class="bsz.ui.actions.ListEvents" lazy-init="true">
+        <property name="eventService" ref="eventService"/>
+        <property name="auditoriumService" ref="auditoriumService"/>
+    </bean>
+
 </beans>

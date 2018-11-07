@@ -1,6 +1,5 @@
 package bsz.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
@@ -8,20 +7,19 @@ public class Menu {
     public Menu() {
     }
 
-    public void show(List<MenuItem> menuItems, boolean endOfThisMenu) {
-        do {
+    public void show(List<MenuItem> menuItems) {
+        while (true) {
             System.out.println("-----------MENU--------------");
-            for (MenuItem item : menuItems) {
-                System.out.println(" (" + item.getKey() + ") " + item.getText());
-            }
+            menuItems.forEach(menuItem -> System.out.println(" (" + menuItem.getKey() + ") " + menuItem.getText()));
             System.out.println("-----------------------------");
-            String choice = Console.readLine(null);
-            System.out.println();
-            for (MenuItem item : menuItems) {
-                if (choice.equals(item.getKey())) {
-                    item.getAction().doAction();
-                }
-            }
-        } while (true);
+            String inputKey = GetInput.read("", true);
+            menuItems.forEach(menuItem -> inputKeyMatchingCheck(inputKey, menuItem));
+        }
+    }
+
+    private void inputKeyMatchingCheck(String inputKey, MenuItem menuItem) {
+        if (inputKey.equals(menuItem.getKey())) {
+            menuItem.getAction().doAction();
+        }
     }
 }

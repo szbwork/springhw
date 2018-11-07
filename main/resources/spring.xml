@@ -27,6 +27,8 @@
         <constructor-arg name="auditorium" ref="auditorium" />
     </bean>
 
+
+
     <bean id="eventDao" class="bsz.dao.EventDao"/>
 
     <bean id="userDao" class="bsz.dao.UserDao"/>

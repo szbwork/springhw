@@ -1,11 +1,16 @@
 package bsz.service;
 
 import bsz.dao.EventDao;
+import bsz.domain.Auditorium;
 import bsz.domain.Event;
+import bsz.domain.EventRating;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class EventServiceImp implements EventService{
 
@@ -70,4 +75,12 @@ public class EventServiceImp implements EventService{
     public Collection<Event> getAll() {
         return eventDao.getAll();
     }
+
+    public @Nullable
+    Event createEvent(String eventName, double basePrice, EventRating eventRating) {
+        return eventDao.createEvent(eventName, basePrice, eventRating);
+    }
+
+
+
 }

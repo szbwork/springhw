@@ -67,14 +67,11 @@ public class EventDao {
         Event event = new Event();
         event.setAirDates(airDates);
         event.setName(eventName);
-        event.setBasePrice(10);
-        event.setRating(EventRating.MID);
+        event.setBasePrice(basePrice);
+        event.setRating(eventRating);
         event.setAuditoriums(auditoriums);
         event.setId((long)event.hashCode());
         return event;
     }
 
-    public User createNewUser() {
-        return new User();
-    }
 }

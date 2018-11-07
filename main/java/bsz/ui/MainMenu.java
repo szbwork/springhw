@@ -1,24 +1,17 @@
 package bsz.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu extends Menu {
 
-    public MainMenu(List<MenuItem> menuItems) {
-        this.menuItems = menuItems;
-    }
-
-    private List<MenuItem> menuItems = new ArrayList();
-
-     private boolean exitFromMainMenu = false;
+    private List<MenuItem> menuItems;
 
     public void show() {
-        super.show(menuItems, exitFromMainMenu);
+        super.show(menuItems);
     }
 
-    public void setExitFromMainMenu(boolean exitFromMainMenu) {
-        this.exitFromMainMenu = exitFromMainMenu;
+    public void setMenuItems(List<MenuItem> menuItems) {
+        this.menuItems = menuItems;
     }
 
 }

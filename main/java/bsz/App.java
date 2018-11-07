@@ -15,10 +15,6 @@ import java.util.List;
  */
 public class App {
     public static void main(String[] args) {
-//        ApplicationContext context = new ClassPathXmlApplicationContext("SpringBeans.xml");
-//        HelloWorld helloWorld = (HelloWorld) context.getBean("helloBean");
-//        helloWorld.printHello();
-
        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 "spring.xml");
 

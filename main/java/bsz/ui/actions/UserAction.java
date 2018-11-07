@@ -7,7 +7,8 @@ import bsz.ui.UserMenu;
 public class UserAction  {
 
     protected void listUsers(UserServiceImp userService) {
-        System.out.println("List of users:");
+        System.out.println();
+        System.out.println("____ List of users ________");
         userService.getAll().forEach(user -> printUserData(user));
         System.out.println("___________________________\n");
     }
