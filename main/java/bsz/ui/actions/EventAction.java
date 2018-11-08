@@ -11,17 +11,18 @@ public class EventAction {
     protected void listEvents(EventServiceImp eventService) {
         System.out.println();
         System.out.println("____ List of events ________");
+        System.out.println();
         eventService.getAll().forEach(event -> printEventData(event));
         System.out.println("___________________________\n");
     }
 
     private void printEventData(Event event) {
-        System.out.println("Event name: " + event.getName() + "Rating: " + event.getRating().toString() + "Base price: " + String.valueOf(event.getBasePrice()));
+        System.out.println("Event name: " + event.getName() + " ,Event rating: " + event.getRating().toString() + " ,Event base price: " + String.valueOf(event.getBasePrice()));
         event.getAuditoriums().forEach((localDateTime, auditorium) -> printDateTimeAndAuditorium(localDateTime, auditorium));
     }
 
     private void printDateTimeAndAuditorium(LocalDateTime localDateTime, Auditorium auditorium) {
-        System.out.println("    Date & time: " + localDateTime.toString() + " Auditorium: " + auditorium.getName());
+        System.out.println("    Event Date & time: " + localDateTime.toString() + " ,Event auditorium: " + auditorium.getName());
     }
 
 }

@@ -36,7 +36,6 @@ public class AddEvent extends EventAction implements MenuAction {
         String eventName = GetInput.read("Event name ? ", false);
         String basePrice = GetInput.read("Base price ? ", false);
         String eventRating = GetInput.read("Event rating ? ", false);
-//        String auditoriumName = GetInput.read("Auditorium name ? ", false);
         event = eventService.createEvent(eventName,  Double.parseDouble(basePrice), EventRating.valueOf(eventRating));
         event.addAirDateTime(createAirDate(), createAuditorium());
         return event;
@@ -65,8 +64,9 @@ public class AddEvent extends EventAction implements MenuAction {
         Auditorium auditorium =null;
         boolean auditoriumIsNotFound =true;
         Set<Auditorium> auditoriums = auditoriumService.getAll();
-        System.out.println("Valid auditorium names:");
+        System.out.print("Valid auditorium names:");
         auditoriums.forEach((auditorium2) -> System.out.print(auditorium2.getName() + ", "));
+        System.out.println();
         while (auditoriumIsNotFound) {
             String auditoriumName = GetInput.read("Auditorium name ? ", false);
             auditorium = auditoriumService.getByName(auditoriumName);

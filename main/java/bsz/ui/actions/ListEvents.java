@@ -22,11 +22,11 @@ public class ListEvents extends EventAction implements MenuAction {
 
     @Override
     public void doAction() {
-        Set<Auditorium> auditoriums = auditoriumService.getAll();
-        System.out.println("Valid auditorium names:");
-        auditoriums.forEach((auditorium2) -> System.out.print(auditorium2.getName() + ", "));
-        System.out.println("numberOfSeats:");
-        auditoriums.forEach((auditorium2) -> System.out.print(auditorium2.getNumberOfSeats() + ", "));
+//        Set<Auditorium> auditoriums = auditoriumService.getAll();
+//        System.out.println("Valid auditorium names:");
+//        auditoriums.forEach(auditorium -> System.out.print(auditorium.getName() + ", "));
+//        System.out.println("numberOfSeats:");
+//        auditoriums.forEach(auditorium -> System.out.print(auditorium.getNumberOfSeats() + ", "));
 
         listEvents(eventService);
     }

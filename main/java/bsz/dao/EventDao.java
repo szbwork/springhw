@@ -18,11 +18,43 @@ public class EventDao {
 
     private Map<Long, Event> events = new HashMap<>();
 
-    public EventDao() {
-        Event event1 = createEvent("event1", 10.0, EventRating.HIGH);
-        Event event2 = createEvent("event2", 5.0, EventRating.LOW);
+    private AuditoriumDao auditoriumDao;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    public EventDao(AuditoriumDao auditoriumDao) {
+        this.auditoriumDao = auditoriumDao;
+        Event event1 = createEvent("event1", 10.0, EventRating.HIGH, "2018-01-01 20:00", "AU1");
+        Event event2 = createEvent("event2", 5.0, EventRating.LOW, "2018-01-01 22:00", "AU2");
         events.put(event1.getId(), event1);
         events.put(event2.getId(), event2);
+    }
+
+    public @Nullable
+    Event createEvent(String eventName, double basePrice, EventRating eventRating, String dateString, String auditoriumName) {
+//        TreeSet<LocalDateTime> airDates = new TreeSet();
+//        airDates.add(LocalDateTime.parse("2018-01-01 20:00", formatter));
+//        airDates.add(LocalDateTime.parse("2018-01-01 22:00", formatter));
+//        TreeMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
+//        event.setAirDates(airDates);
+//        event.setAuditoriums(auditoriums);
+        Event event = new Event();
+        event.setName(eventName);
+        event.setBasePrice(basePrice);
+        event.setRating(eventRating);
+        event.addAirDateTime(LocalDateTime.parse(dateString, formatter), auditoriumDao.getByName(auditoriumName));
+        event.setId((long)event.hashCode());
+        return event;
+    }
+
+    public @Nullable
+    Event createEvent(String eventName, double basePrice, EventRating eventRating) {
+        Event event = new Event();
+        event.setName(eventName);
+        event.setBasePrice(basePrice);
+        event.setRating(eventRating);
+        event.setId((long)event.hashCode());
+        return event;
     }
 
     public @Nullable
@@ -61,25 +93,5 @@ public class EventDao {
         events.remove(event.getId());
     }
 
-    public @Nullable
-    Event createEvent(String eventName, double basePrice, EventRating eventRating) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        TreeSet<LocalDateTime> airDates = new TreeSet();
-//        LocalDateTime airDate1 = LocalDateTime.parse("2018-01-01 02:00", formatter);
-//        LocalDateTime airDate2 = LocalDateTime.parse("2018-01-01 02:00", formatter);
-        airDates.add(LocalDateTime.parse("2018-01-01 20:00", formatter));
-        airDates.add(LocalDateTime.parse("2018-01-01 22:00", formatter));
-
-        TreeMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
-
-        Event event = new Event();
-        event.setAirDates(airDates);
-        event.setName(eventName);
-        event.setBasePrice(basePrice);
-        event.setRating(eventRating);
-        event.setAuditoriums(auditoriums);
-        event.setId((long)event.hashCode());
-        return event;
-    }
 
 }

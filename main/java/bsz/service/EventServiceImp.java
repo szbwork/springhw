@@ -77,10 +77,14 @@ public class EventServiceImp implements EventService{
     }
 
     public @Nullable
+    Event createEvent(String eventName, double basePrice, EventRating eventRating, String dateString, String auditoriumName) {
+        return eventDao.createEvent(eventName, basePrice, eventRating, dateString, auditoriumName);
+    }
+
+    public @Nullable
     Event createEvent(String eventName, double basePrice, EventRating eventRating) {
         return eventDao.createEvent(eventName, basePrice, eventRating);
     }
-
 
 
 }

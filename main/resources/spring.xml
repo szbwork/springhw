@@ -6,35 +6,38 @@
     <import resource="discount.xml"/>
     <import resource="menu.xml"/>
 
-    <bean id="auditoriumProperty"
-          class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
-        <property name="location">
-            <value>classpath:auditorium.properties, classpath:auditorium2.properties</value>
-            <!--<value>classpath:auditorium2.properties</value>-->
+    <bean id="auditoriumProperty" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+            <!--<value>classpath:auditorium.properties, classpath:auditorium2.properties</value>-->
+            <value>classpath:auditorium.properties</value>
+                <value>classpath:auditorium2.properties</value>
+            </list>
         </property>
         <property name="ignoreResourceNotFound" value="true" />
         <property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
 
-    <bean id="auditorium" class="bsz.domain.Auditorium" scope="prototype">
+    <bean id="auditorium1" class="bsz.domain.Auditorium" scope="prototype">
         <property name="name" value="${auditorium.name}"/>
         <property name="numberOfSeats" value="#{new Long('${auditorium.numberOfSeats}')}"/>
         <property name="vipSeats" value="#{new java.util.TreeSet('${auditorium.vipSeats}')}"/>
     </bean>
 
     <bean id="auditorium2" class="bsz.domain.Auditorium" scope="prototype">
-        <property name="name" value="${auditorium.name}"/>
-        <property name="numberOfSeats" value="#{new Long('${auditorium.numberOfSeats}')}"/>
-        <property name="vipSeats" value="#{new java.util.TreeSet('${auditorium.vipSeats}')}"/>
+        <property name="name" value="${auditorium2.name}"/>
+        <property name="numberOfSeats" value="#{new Long('${auditorium2.numberOfSeats}')}"/>
+        <property name="vipSeats" value="#{new java.util.TreeSet('${auditorium2.vipSeats}')}"/>
     </bean>
 
     <bean id="auditoriumDao" class="bsz.dao.AuditoriumDao">
-        <constructor-arg name="auditorium" ref="auditorium" />
+        <constructor-arg name="auditorium1" ref="auditorium1" />
+        <constructor-arg name="auditorium2" ref="auditorium2" />
     </bean>
 
-
-
-    <bean id="eventDao" class="bsz.dao.EventDao"/>
+    <bean id="eventDao" class="bsz.dao.EventDao">
+        <constructor-arg name="auditoriumDao" ref="auditoriumDao"/>
+    </bean>
 
     <bean id="userDao" class="bsz.dao.UserDao"/>
 

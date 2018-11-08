@@ -91,11 +91,11 @@
                     <property name="key" value="A"/>
                     <property name="action" ref="addEvent"/>
                 </bean>
-                <!--<bean class="bsz.ui.MenuItem">-->
-                    <!--<property name="text" value="Remove Event"/>-->
-                    <!--<property name="key" value="R"/>-->
-                    <!--<property name="action" ref="removeEvent"/>-->
-                <!--</bean>-->
+                <bean class="bsz.ui.MenuItem">
+                    <property name="text" value="Remove Event"/>
+                    <property name="key" value="R"/>
+                    <property name="action" ref="removeEvent"/>
+                </bean>
                 <bean class="bsz.ui.MenuItem">
                     <property name="text" value="List Events"/>
                     <property name="key" value="L"/>
@@ -113,6 +113,10 @@
     <bean id="addEvent" class="bsz.ui.actions.AddEvent" lazy-init="true">
         <property name="eventService" ref="eventService"/>
         <property name="auditoriumService" ref="auditoriumService"/>
+    </bean>
+
+    <bean id="removeEvent" class="bsz.ui.actions.RemoveEvent" lazy-init="true">
+        <property name="eventService" ref="eventService"/>
     </bean>
 
     <bean id="listEvents" class="bsz.ui.actions.ListEvents" lazy-init="true">
