@@ -5,22 +5,27 @@
 
     <import resource="discount.xml"/>
     <import resource="menu.xml"/>
-    <!--<context:component-scan base-package="bsz" />-->
 
-    <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="locations">
-            <list>
-                <value>classpath:auditorium.properties</value>
-            </list>
+    <bean id="auditoriumProperty"
+          class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:auditorium.properties, classpath:auditorium2.properties</value>
+            <!--<value>classpath:auditorium2.properties</value>-->
         </property>
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
 
     <bean id="auditorium" class="bsz.domain.Auditorium" scope="prototype">
-        <property name="name" value="${a[0].name}"/>
-        <property name="numberOfSeatsString" value="${a[0].numberOfSeats}"/>
-        <property name="vipSeatsString" value="${a[0].vipSeats}"/>
-        <!--<property name="numberOfSeats" value="#{new Long('${a[0].numberOfSeats}')}"/>-->
-        <!--<property name="vipSeats" value="#{new TreeSet('${a[0].vipSeats}')}"/>-->
+        <property name="name" value="${auditorium.name}"/>
+        <property name="numberOfSeats" value="#{new Long('${auditorium.numberOfSeats}')}"/>
+        <property name="vipSeats" value="#{new java.util.TreeSet('${auditorium.vipSeats}')}"/>
+    </bean>
+
+    <bean id="auditorium2" class="bsz.domain.Auditorium" scope="prototype">
+        <property name="name" value="${auditorium.name}"/>
+        <property name="numberOfSeats" value="#{new Long('${auditorium.numberOfSeats}')}"/>
+        <property name="vipSeats" value="#{new java.util.TreeSet('${auditorium.vipSeats}')}"/>
     </bean>
 
     <bean id="auditoriumDao" class="bsz.dao.AuditoriumDao">

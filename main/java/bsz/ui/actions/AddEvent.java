@@ -12,7 +12,9 @@ import bsz.ui.GetInput;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.NavigableMap;
 import java.util.NavigableSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class AddEvent extends EventAction implements MenuAction {
@@ -34,9 +36,9 @@ public class AddEvent extends EventAction implements MenuAction {
         String eventName = GetInput.read("Event name ? ", false);
         String basePrice = GetInput.read("Base price ? ", false);
         String eventRating = GetInput.read("Event rating ? ", false);
-        String auditoriumName = GetInput.read("Auditorium name ? ", false);
+//        String auditoriumName = GetInput.read("Auditorium name ? ", false);
         event = eventService.createEvent(eventName,  Double.parseDouble(basePrice), EventRating.valueOf(eventRating));
-        event.addAirDateTime(createAirDate(), auditoriumService.getByName(auditoriumName));
+        event.addAirDateTime(createAirDate(), createAuditorium());
         return event;
     }
 
@@ -47,7 +49,8 @@ public class AddEvent extends EventAction implements MenuAction {
 
         while (airDateIsBad) {
             try {
-                String date = GetInput.read("Event date (yyyy-MM-dd HH:mm) ? ", false);
+//                String date = GetInput.read("Event date (yyyy-MM-dd HH:mm) ? ", false);
+                String date = "2018-01-01 00:00";
                 airDate = LocalDateTime.parse(date, formatter);
                 airDateIsBad =false;
             }
@@ -61,7 +64,9 @@ public class AddEvent extends EventAction implements MenuAction {
     private Auditorium createAuditorium() {
         Auditorium auditorium =null;
         boolean auditoriumIsNotFound =true;
-
+        Set<Auditorium> auditoriums = auditoriumService.getAll();
+        System.out.println("Valid auditorium names:");
+        auditoriums.forEach((auditorium2) -> System.out.print(auditorium2.getName() + ", "));
         while (auditoriumIsNotFound) {
             String auditoriumName = GetInput.read("Auditorium name ? ", false);
             auditorium = auditoriumService.getByName(auditoriumName);

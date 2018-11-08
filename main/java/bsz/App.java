@@ -2,6 +2,7 @@ package bsz;
 
 import bsz.domain.User;
 import bsz.service.UserServiceImp;
+import bsz.ui.EventMenu;
 import bsz.ui.UserMenu;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -29,9 +30,9 @@ public class App {
 //        List<User> userList = new ArrayList<>(userService.getAll());
 //        System.out.println(userList.get(2).getFirstName() + " " + userList.get(2).getLastName());
 
-        UserMenu userMenu;
-        userMenu = (UserMenu) context.getBean("userMenu");
-        userMenu.show();
+        EventMenu eventMenu;
+        eventMenu = (EventMenu) context.getBean("eventMenu");
+        eventMenu.show();
 
 
 //        mainMenu.show();

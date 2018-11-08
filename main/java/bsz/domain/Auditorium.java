@@ -13,6 +13,7 @@ public class Auditorium implements Comparable< Auditorium >{
 
     private long numberOfSeats;
 
+
     private Set<Long> vipSeats = Collections.emptySet();
 
     private Set<Long> availableSeats = Collections.emptySet();
@@ -25,6 +26,11 @@ public class Auditorium implements Comparable< Auditorium >{
     public Auditorium() {
         setAvailableSeats(getAllSeats());
     }
+
+    public void setVipSeats(Set<Long> vipSeats) {
+        this.vipSeats = vipSeats;
+    }
+
 
     /**
      * Counts how many vip seats are there in supplied <code>seats</code>
@@ -51,7 +57,8 @@ public class Auditorium implements Comparable< Auditorium >{
     }
 
     public long getNumberOfSeats() {
-        return Long.parseLong(numberOfSeatsString);
+//        return Long.parseLong(numberOfSeatsString);
+        return numberOfSeats;
     }
 
     public void setNumberOfSeatsString(String numberOfSeatsString) {

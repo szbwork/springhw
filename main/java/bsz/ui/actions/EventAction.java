@@ -16,12 +16,12 @@ public class EventAction {
     }
 
     private void printEventData(Event event) {
-        System.out.println("Event name: " + event.getName() + " Event rating: " + event.getRating().toString() + " Event base price: " + String.valueOf(event.getBasePrice()));
+        System.out.println("Event name: " + event.getName() + "Rating: " + event.getRating().toString() + "Base price: " + String.valueOf(event.getBasePrice()));
         event.getAuditoriums().forEach((localDateTime, auditorium) -> printDateTimeAndAuditorium(localDateTime, auditorium));
     }
 
     private void printDateTimeAndAuditorium(LocalDateTime localDateTime, Auditorium auditorium) {
-        System.out.println("Event date & time: " + localDateTime.toString() + " Event auditorium: " + auditorium.getName());
+        System.out.println("    Date & time: " + localDateTime.toString() + " Auditorium: " + auditorium.getName());
     }
 
 }

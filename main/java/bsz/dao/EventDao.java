@@ -8,6 +8,7 @@ import bsz.domain.User;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -62,8 +63,15 @@ public class EventDao {
 
     public @Nullable
     Event createEvent(String eventName, double basePrice, EventRating eventRating) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         TreeSet<LocalDateTime> airDates = new TreeSet();
+//        LocalDateTime airDate1 = LocalDateTime.parse("2018-01-01 02:00", formatter);
+//        LocalDateTime airDate2 = LocalDateTime.parse("2018-01-01 02:00", formatter);
+        airDates.add(LocalDateTime.parse("2018-01-01 20:00", formatter));
+        airDates.add(LocalDateTime.parse("2018-01-01 22:00", formatter));
+
         TreeMap<LocalDateTime, Auditorium> auditoriums = new TreeMap<>();
+
         Event event = new Event();
         event.setAirDates(airDates);
         event.setName(eventName);

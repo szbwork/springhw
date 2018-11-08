@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class GetInput {
     public static String read(String message, boolean withLineBreak) {
-        String result;
-
         if (!message.isEmpty()) {
             if (withLineBreak) {
                 System.out.println(message);
